@@ -1413,6 +1413,11 @@ public class IoTDBDescriptor {
             conf.getTimestampPrecision()));
   }
 
+  private void loadMetadataConfig(Properties properties) {
+    conf.setMetadataManagerType(
+        properties.getProperty("meta_data_manager", conf.getMetadataManagerType().name()));
+  }
+
   /** Get default encode algorithm by data type */
   public TSEncoding getDefaultEncodingByType(TSDataType dataType) {
     switch (dataType) {
