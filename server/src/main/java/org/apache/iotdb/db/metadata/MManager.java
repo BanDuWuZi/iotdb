@@ -1510,11 +1510,6 @@ public class MManager implements IMetaManager {
     return new ArrayList<>(res);
   }
 
-  @Override
-  public Map<PartialPath, IMeasurementSchema> getAllMeasurementSchemaByPrefix(
-      PartialPath prefixPath) throws MetadataException {
-    return mtree.getAllMeasurementSchemaByPrefix(prefixPath);
-  }
   // endregion
   // endregion
 
