@@ -2292,6 +2292,9 @@ public class MRocksDBManager implements IMetaManager {
       PartialPath path = new PartialPath(devicePath.getFullPath(), measurementList[i]);
       IMeasurementMNode node = getMeasurementMNode(path);
       if (node == null) {
+        if (!config.isAutoCreateSchemaEnabled()) {
+          throw new PathNotExistException(path.getFullPath());
+        }
         missingNodeIndex.put(i, path);
       } else {
         nodeMap.put(i, node);
@@ -2300,10 +2303,6 @@ public class MRocksDBManager implements IMetaManager {
 
     // create missing nodes
     if (!missingNodeIndex.isEmpty()) {
-      if (!config.isAutoCreateSchemaEnabled()) {
-        throw new PathNotExistException(devicePath + PATH_SEPARATOR);
-      }
-
       if (!(plan instanceof InsertRowPlan) && !(plan instanceof InsertTabletPlan)) {
         throw new MetadataException(
             String.format(
