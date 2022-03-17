@@ -1516,7 +1516,7 @@ public class MRocksDBManager implements IMetaManager {
                 new ShowDevicesResult(
                     fullPath,
                     RocksDBUtils.isAligned(b),
-                    getBelongedToSG(plan.getPath().getNodes())));
+                    getBelongedToSG(MetaUtils.splitPathToDetachedPath(fullPath))));
           } catch (MetadataException e) {
             logger.error(e.getMessage());
             return false;
